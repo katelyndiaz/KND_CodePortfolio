@@ -1,0 +1,68 @@
+---
+title: "Statistical Analysis Code Example (R)"
+author: "Katelyn N Diaz"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  echo = FALSE, #hide code
+  warning = FALSE
+)
+
+library(tidyverse)
+library(dplyr)
+library(survey) #for clustering
+
+```
+
+
+### Creating contingency table function - takes two vectors as inputs and returns a contingency table with row percentages
+
+```{r}
+calculate_percentage_table <- function(x, y) {
+  contingency_table <- table(x, y) # Create contingency table
+  percentage_table <- prop.table(contingency_table, margin = 1) * 100 # Calculate row percentages
+  return(percentage_table)
+}
+```
+
+Chi-squared
+
+```{r}
+table(final_nycNEVIjoin$nevi_group, final_nycNEVIjoin$DPPreferral) #numerical 
+calculate_percentage_table(final_nycNEVIjoin$nevi_group, final_nycNEVIjoin$DPPreferral) #percentage
+```
+
+----
+
+### Function for cluster logistic regression models
+
+```{r}
+clusterSummary <- function(model_formula, survey_design) {
+  model <- svyglm(model_formula, design = survey_design, family = "binomial") #fit logreg model using svyglm
+
+  summary_output <- summary(model) #display model summary
+
+  log_odds_ratios <- summary_output$coef[, 1] #extract log-odds ratios
+
+  odds_ratios <- exp(log_odds_ratios) #calc odds ratios
+
+  return(list(summary = summary_output, log_odds_ratios = log_odds_ratios, odds_ratios = odds_ratios)) #output: list of summary, log-odds, and odds ratios
+}
+
+# result_svyglm <- clusterSummary(nevi_group ~ DPPreferral + Covariate1 + Covariate2, FIPS_cluster) #clusterSummary() functionexample usage
+
+## making Tract_FIPS the cluster variable
+FIPS_cluster <- svydesign(ids = ~Tract_FIPS, data = final_nycNEVIjoin) 
+```
+
+
+### Logistic Regression Model with Clustering and Covariate Adjusting
+Covariate vars to adjust for: Age (continuous), sex, Insurance, language (cat), BMI (continuous)
+
+```{r}
+clusterSummary(DPPreferral ~ nevi_group+ Age_at_Index_Date + sex + Insurance + langcat + BMI_round, FIPS_cluster)
+
+```
