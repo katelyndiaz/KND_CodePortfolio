@@ -10,7 +10,7 @@ Last Updated: November 13, 2024
 
 ### Statistical Analysis (R)
 
-- [Logistic Regression Model with Clustering](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/StatisticalAnalysisCode/StatisticalAnalysisCode.Rmd)
+- [Logistic Regression Model with Clustering](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/StatisticalAnalysisCode.Rmd)
 
 ### Graph Visualization (R)
 
