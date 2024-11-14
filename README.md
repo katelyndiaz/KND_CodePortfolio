@@ -14,8 +14,8 @@ Last Updated: November 13, 2024
 
 ### Graph Visualization (R)
 
-- [Data Prep and Stacked Bar Chart Functions](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/GraphedVisualization.R): 
+- [Data Prep and Stacked Bar Chart Functions](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/GraphedVisualization.R) 
 
 ### Data Pulling (SQL; Caboodle)
 
-- [SQL Data Pulling from Caboodle](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/DataPulling.sql): 
+- [SQL Data Pulling from Caboodle](https://github.com/katelyndiaz/KND_CodePortfolio/blob/main/DataPulling.sql) 
